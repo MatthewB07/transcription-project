@@ -1,6 +1,5 @@
 import whisper
 import torch
-import time
 
 def main():
 
