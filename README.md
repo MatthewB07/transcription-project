@@ -26,10 +26,10 @@ A full-stack web application that transcribes audio and video files using OpenAI
 
 ### **How It Works**
 
-User selects an audio or video file in the browser
-The file is sent via multipart form upload to the FastAPI backend
-The backend runs the Whisper model on the file and returns the transcription and detected language
-Results are displayed in the UI
+* User selects an audio or video file in the browser
+* The file is sent via multipart form upload to the FastAPI backend
+* The backend runs the Whisper model on the file and returns the transcription and detected language
+* Results are displayed in the UI
 
 ### **Getting Started**
 
