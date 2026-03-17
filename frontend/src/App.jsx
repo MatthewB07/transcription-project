@@ -41,19 +41,16 @@ function App() {
   };
 
   return(
-    <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', fontFamily: 'sans-serif' }}>
+    <div className="app-container">
       <h1>Video Transcriber</h1>
-      
-      <div style={{ marginBottom: '20px' }}>
+      <h3>Using Whisper</h3>
+
+      <div className="file-input-row">
         <input type="file" accept="video/*,audio/*" onChange={handleFileChange} />
-        <button 
-          onClick={uploadFile} 
+        <button
+          className="transcribe-btn"
+          onClick={uploadFile}
           disabled={loading || !file}
-          style={{ 
-            marginLeft: '10px', 
-            padding: '8px 16px', 
-            cursor: loading ? 'not-allowed' : 'pointer' 
-          }}
         >
           {loading ? 'Transcribing...' : 'Start Transcription'}
         </button>
@@ -64,15 +61,10 @@ function App() {
       )}
 
       {result && (
-        <div style={{ marginTop: '20px', borderTop: '1px solid #eee', paddingTop: '20px' }}>
-          <h3>Transcription Result</h3>
-          <p><strong>Detected Language:</strong> {result.language}</p>
-          <div style={{ 
-            background: '#f4f4f4', 
-            padding: '20px', 
-            borderRadius: '8px',
-            whiteSpace: 'pre-wrap' // Keeps the formatting of the text
-          }}>
+        <div className="result-section">
+          <h3 className="transcripton-result">Transcription Result</h3>
+          <p className="detected-language"><strong>Detected Language:</strong> {result.language}</p>
+          <div className="transcription-box">
             {result.transcription}
           </div>
         </div>
