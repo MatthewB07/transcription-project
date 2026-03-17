@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import whisper
 import torch
@@ -30,9 +31,17 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan = lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 @app.get("/")
 def root():
-    return {"Hello": "World"}
+    return {"Server": "Active"}
 
 @app.post("/transcribe")
 async def transcribe_audio(file: UploadFile = File(...)):
