@@ -1,10 +1,30 @@
 import './App.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useStopwatch } from "react-timer-hook";
 
 function App() {
   const [file, setFile] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const {
+    milliseconds,
+    seconds,
+    minutes,
+    hours,
+    start,
+    pause,
+    reset,
+  } = useStopwatch({ autoStart: false});
+
+  useEffect(() => {
+    if (loading) {
+      reset();
+      start();
+    } else {
+      pause();
+    }
+  }, [loading]);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -15,6 +35,9 @@ function App() {
 
     setResult(null);
     setLoading(true);
+
+    reset();
+    start(); 
 
     const formData = new FormData();
     formData.append("file", file);
@@ -40,6 +63,8 @@ function App() {
     }
   };
 
+  const formatTime = (time) => String(time).padStart(2, '0');
+
   return(
     <div className="app-container">
       <h1>Video Transcriber</h1>
@@ -63,6 +88,7 @@ function App() {
       {result && (
         <div className="result-section">
           <h3 className="transcripton-result">Transcription Result</h3>
+          <p className="timer"> <strong>Time Taken:</strong> {formatTime(minutes)}:{formatTime(seconds)}:{formatTime(milliseconds)}</p>
           <p className="detected-language"><strong>Detected Language:</strong> {result.language}</p>
           <div className="transcription-box">
             {result.transcription}
