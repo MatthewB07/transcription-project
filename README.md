@@ -20,6 +20,7 @@ A full-stack web application that transcribes audio and video files using OpenAI
 
 **Frontend**
 
+* JavaScript (planned TypeScript migration)
 * React 19
 * Vite
 * CSS (custom)
